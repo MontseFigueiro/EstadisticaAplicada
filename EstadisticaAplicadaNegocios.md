@@ -354,3 +354,53 @@ resuleve usando inducción hacia atrás en base a reglas de probabilidad y
 el criterio del valor esperado.
 
 ### Variables Aleatorias
+
+Es una variable que toma valores numéricos determinados por el resultado
+de un experimento que tiene asociado una probabilidad. Se tira una
+moneda al aire (experimento), definimos X como el "número de caras
+obtenidas". X es una variable aleatoria que puede tomar los valores
+0,1,2,3 y cada valor tiene una probabilidad asociada.
+
+Se lanza 3 veces la moneda. X = número de caras obtenidas. Puedo obtener
+0, 1, 2 o 3 caras. H =cara Las combinaciones posibles son
+HHH,HHT,HTH,THH,HTT,THT,TTH,TTT
+
+La tabla de probabilidades es:
+
+<table>
+<thead>
+<tr class="header">
+<th>X</th>
+<th>P(X)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1/8=0.125</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>3/8=0.375</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>3/8=0.375</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>1/8=0.125</td>
+</tr>
+</tbody>
+</table>
+
+Pueden ser:
+
+-   categóricas
+    -   Nominales: sexo, raza
+    -   Ordinales: nivel educativo
+-   Numéricas
+    -   Discretas: numero de hijos, edad
+    -   Coninuas: ingreso, altura
+
+#### Variables Aleatorias Discretas

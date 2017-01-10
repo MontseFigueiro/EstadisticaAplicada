@@ -259,6 +259,42 @@ Técnica gráfica para representar un problema de toma de decisiones. Se resuleve 
 
 ###Variables Aleatorias
 
+Es una variable que toma valores numéricos determinados por el resultado de un experimento que tiene asociado una probabilidad. Se tira una moneda al aire (experimento), definimos X como el "número de caras obtenidas". X es una variable aleatoria que puede tomar los valores 0,1,2,3 y cada valor tiene una probabilidad asociada.
+
+Se lanza 3 veces la moneda.
+X = número de caras obtenidas. Puedo obtener 0, 1, 2 o 3 caras.
+H =cara
+Las combinaciones posibles son HHH,HHT,HTH,THH,HTT,THT,TTH,TTT
+
+La tabla de probabilidades es:
+
+|X|P(X)|
+|---|---|
+|0|1/8=0.125|
+|1|3/8=0.375|
+|2|3/8=0.375|
+|3|1/8=0.125|
+
+
+Pueden ser:
+
+- categóricas
+    - Nominales: sexo, raza
+    - Ordinales: nivel educativo
+ 
+- Numéricas
+    - Discretas: numero de hijos, edad
+    - Coninuas: ingreso, altura
+    
+    
+    
+####Variables Aleatorias Discretas
+
+
+
+
+
+
 
 
 
