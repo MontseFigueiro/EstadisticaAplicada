@@ -404,3 +404,240 @@ Pueden ser:
     -   Coninuas: ingreso, altura
 
 #### Variables Aleatorias Discretas
+
+Un ejemplo es lanzar un dado, X es la variable aleatoria que indica el
+número resultante. P(X=1)=1/6
+
+LA probabilidad de que X sea igual o mayor que 2 e igual o menor que 4
+significa que puede ser 2,3,4 esto es 3/6 Probabilidad de que X sea
+igual o menor que 5 es 5/6
+
+Son las sumas de las probabilidades.
+
+**VALOR ESPERADO** o Esperanza Matemática
+
+Es una medida de lo que ocurre con más frecuencia.
+
+    \( \mu \ M \) = E(X)= p1x1+p2x2....
+
+Ejemplo:
+
+<table>
+<thead>
+<tr class="header">
+<th>X</th>
+<th>P(X=x)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0,30</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0,27</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0,20</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>0,13</td>
+</tr>
+</tbody>
+</table>
+
+Cantidad de autos que compra una familia en el lapso de 5 años,
+conocemos la probabilidad asociada a cada x.
+
+El valor esperado es:
+
+    VE <- (0*0.30+1*0.27+2*0.20+3*0.13)
+    VE
+
+    ## [1] 1.06
+
+El valor esperado es que en cinco años se compren un coche de media.
+
+Propiedades de la esperanza:
+
+-   Si tenemos dos variables aleatorias X e Y
+    -   E(X+Y)=E(X)+E(Y)
+    -   E(X-Y)=E(X)-E(Y)
+
+**VARIANZA**
+
+No podemos limitarnos a medidas de tendencia central como la media, no
+tendríamos idea de como se distribuyen los datos. Calculamos la varianza
+como medida de dispersión.
+
+Si X es discreta:
+
+Varianza = (X-E(X))^2
+
+Es un promedio ponderado por su probabilidad de la distancia cuadrática
+entre la media y cada x. Es mayor cuanto más lejos estén los x de la
+media y cuanto mayor sea el peso (ocurrencia) de esos valores.
+
+En el ejemplo anterior de los coches:
+
+<table>
+<thead>
+<tr class="header">
+<th>X</th>
+<th>P(X)</th>
+<th>x-mu</th>
+<th>(x-mu)^2</th>
+<th>(x-mu)^2*P(x)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0.30</td>
+<td>0-1.51</td>
+<td>2.28</td>
+<td>2.28*0.30=0.68</td>
+</tr>
+</tbody>
+</table>
+
+La suma de la última columna es 2.03
+
+    valores <- c(0,1,2,3,4,5,6)
+    probabilidades <- c(0.30,0.27,0.20,0.13,0.06,0.03,0.01)
+    tabla <- data.frame(valores,probabilidades)
+    media <- sum(tabla$valores*tabla$probabilidades)
+    tabla$esperanza <- tabla$valores*tabla$probabilidades
+    tabla$var <- (tabla$valores-media)^2
+    var <- sum(tabla$var*tabla$probabilidades)
+    var
+
+    ## [1] 2.0299
+
+Propiedades de la Varianza:
+
+V(X+-Y)=V(X)+-V(Y)+-2COV(X,Y) son dependientes V(X+-Y)=V(X)+V(Y) si son
+independientes COV(X,Y)=0
+
+**COVARIANZA**
+
+Es una medida de asociación entre dos variables aleatorias X e Y.
+
+COV(X,Y)= E\[(X-mux)(Y-muY)\]= SUMA ((x-mu)(y-mu)p(x,y))
+
+Hay que conocer la probabilidad conjunta. Una covarianza positiva
+implica una asociación lineal positiva.
+
+> 0 si sube X sube Y &lt;0 si sube X baja Y =0 no hay relacion
+
+Las variables son independientes si:
+
+p(x,y)=p(x).p(y) cov(X,Y)=0
+
+**CORRELACIÓN**
+
+La covarianza depende de las unidades de medición. Muchas veces
+utilizamos el coeficiente de correlación.
+
+COV(X,Y)/varianza(X)\*varianza(Y)
+
+Mantiene el signo de la covarianza, es 0 cuando la covarianza es 0.
+
+Su valor va desde -1 a 1. Es una medida muy utilizada en la práctica.
+
+-   Correlación positiva perfecta 1
+-   Correlacion negativa perfecta -1
+-   correlación 0
+-   Fuerte asociacion no lineal (la distribución es polinomica)
+
+### Distribución Binomial
+
+Una distribucion de probabilidad es aquella función que asigna una
+probabilidad a cada posible valor de una variable aleatoria. La binomial
+es muy usual en variables aleatorias discretas.
+
+Probabilidades Binomiales:
+
+Lanzamos una moneda tres veces, cual es la probabilidad de sacar una
+cara:
+
+H cara T cruz
+
+HHH HTH HHT THH HTT THT TTH TTT
+
+    P_una_cara <- 1/8+1/8+1/8
+    P_una_cara
+
+    ## [1] 0.375
+
+Y la probabilidad de sacar una cara cuando se lanzan 100 veces una
+moneda??
+
+-   Un experimento aleatorio arroja dos resultados, exito(p)
+    o fracaso(1-p)
+-   Se llevan a cabo n repeticiones independientes del experimento
+-   La distribución de éxitos X se conoce como distribución binomial:
+-   E(X)=n.p y V(X)=n.p(1-p)
+
+dbinom(x, size, prob) pbinom(x, size, prob) qbinom(p, size, prob)
+rbinom(n, size, prob)
+
+**pbinom** Probabilidad de sacar 26 o mnenos caras al lanzar 51 veces
+una moneda
+
+    x <- pbinom(26,51,0.5)
+    x
+
+    ## [1] 0.610116
+
+**dbinom** Da la densidad de la distribución en cada punto
+
+    x <- seq(0,50,by=1)
+    y <- dbinom(x,50,0.5)
+    plot(x,y)
+
+![](EstadisticaAplicadaNegocios_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+**qbinom** Toma la probabilidad y nos da un número de tiradas.
+
+Cuantas caras tienen una probabilidad de 25% de salir cuando lanzamos la
+moneda 51 veces.
+
+    x <- qbinom(0.25,51,1/2)
+    x
+
+    ## [1] 23
+
+**rbinom** Genera un número aleatorio de valores dado una probabilidad
+
+Encontrar 8 valores aleatorios de un ejemplo de 150 con una probabilidad
+de 0.4
+
+    x <- rbinom(8,150,.4)
+    x
+
+    ## [1] 66 61 60 57 68 53 59 64
+
+Ejemplo:
+
+Un exámen final consta de 10 preguntas multiple respuesta (4 opciones
+cada una), solo una respuesta es correcta. Cual es la probabilidad de
+acertar 5 preguntas o más al azar.
+
+Tengo la probabilidad de éxito para cada pregunta que es 1/4, el número
+de lanzamientos es 10 y quiero 5 o más éxitos. LA probabilidad de sacar
+4 o menos éxitos:
+
+    x <- pbinom(4,10,1/4)
+    x
+
+    ## [1] 0.9218731
+
+    inversa <- 1-x
+    round(inversa,2)
+
+    ## [1] 0.08
+
+### Distribución Normal
